@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="./Observer.js"></script>
+        <script src="./Mvvm.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <button v-on:click="handleClick1">button-on</button>
+            <button @click="handleClick2">button-@</button>
+            <div>
+                <p>
+                    <span v-text="msg">msg</span>
+                    <span v-html="msg"></span>
+                </p>
+            </div>
+            <p>{{person.name}}</p>
+            <p>{{person.age}}</p>
+            <p v-bind:data="test">{{person.sex}}</p>
+            <input v-modal="person.name" type="text" />
+        </div>
+        <script>
+            new Mvvm({
+                el: '#app',
+                data: {
+                    person: {
+                        name: 'yyh',
+                        age: 18,
+                        sex: '女'
+                    },
+                    msg: '<h1>mvvm</h1>'
+                },
+                methods: {
+                    handleClick1() {
+                        this.$data.msg = 'test'
+                        this.$data.person.age = 22
+                        // console.log('on-handleClick -- ', this)
+                    },
+                    handleClick2() {
+                        this.$data.msg = '<h1>mvvm</h1>'
+                        this.$data.person.age = 18
+                        // console.log('@-handleClick -- ', this)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
